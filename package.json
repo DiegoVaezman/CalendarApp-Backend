@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon index.ts",
-    "start": "npx node index.ts"
+    "start": "npx ts-node index.ts"
   },
   "keywords": [],
   "author": "",
