@@ -4,14 +4,14 @@ import { Types } from 'mongoose';
 //incluir types del payload en los types de jwt
 declare module 'jsonwebtoken' {
     export interface PayloadJWT extends jwt.JwtPayload {
-        uid: Types.ObjectId;
+        _id: Types.ObjectId;
         name: string;
     }
 }
 
-const generateJWT = (uid: Types.ObjectId, name: string) => {
+const generateJWT = (_id: Types.ObjectId, name: string) => {
     return new Promise((resolve, reject) => {
-        const payload = {  uid, name};
+        const payload = {  _id, name};
 
         jwt.sign(payload, process.env.SECRET_JWT_SEED || 'MISSING_SECRET', {
             expiresIn: '2h'

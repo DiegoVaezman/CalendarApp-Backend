@@ -11,11 +11,11 @@ const getEvents =  async (req: TypedRequest, res: Response) => {
 };
 
 const createEvenet =  async (req: TypedRequest<EventType>, res: Response) => {
-    const {title} = req.body;
-    const {uid} = req;
+    const {_id} = req;
+    console.log(req.body)
 
     const newEvent = new Event(req.body);
-    newEvent.user = uid!;
+    newEvent.user = _id!;
 
     try {
         await newEvent.save();
@@ -35,7 +35,7 @@ const createEvenet =  async (req: TypedRequest<EventType>, res: Response) => {
 
 const updateEvent =  async (req: TypedRequest<EventType, {id: string}>, res: Response) => {
     const {id} = req.params;
-    const {uid} = req;
+    const {_id} = req;
 
     try {
         const event = await Event.findById(id);
@@ -46,7 +46,7 @@ const updateEvent =  async (req: TypedRequest<EventType, {id: string}>, res: Res
             });
         };
 
-        if (event!.user.toString() !== uid!.toString()) {
+        if (event!.user.toString() !== _id!.toString()) {
             return res.status(401).json({
                 ok: false,
                 msg: 'No tienes privilegio para editar este evento'
@@ -55,7 +55,7 @@ const updateEvent =  async (req: TypedRequest<EventType, {id: string}>, res: Res
 
         const newEvent = {
             ...req.body,
-            user: uid
+            user: _id
         };
 
         const updatedEvent = await Event.findByIdAndUpdate(id, newEvent, {new: true});
@@ -76,7 +76,7 @@ const updateEvent =  async (req: TypedRequest<EventType, {id: string}>, res: Res
 
 const deleteEvent =  async (req: TypedRequest<{}, {id: string}>, res: Response) => {
     const {id} = req.params;
-    const {uid} = req;
+    const {_id} = req;
 
     try {
         const event = await Event.findById(id);
@@ -88,7 +88,7 @@ const deleteEvent =  async (req: TypedRequest<{}, {id: string}>, res: Response) 
             });
         };
 
-        if (event!.user.toString() !== uid!.toString()) {
+        if (event!.user.toString() !== _id!.toString()) {
             return res.status(401).json({
                 ok: false,
                 msg: 'No tienes privilegio para editar este evento'

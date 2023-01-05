@@ -6,4 +6,5 @@ export interface EventType {
     start: Date;
     end: Date;
     user: MongooseTypes.ObjectId;
+    bgColor: string;
 }

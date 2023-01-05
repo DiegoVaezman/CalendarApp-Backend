@@ -19,8 +19,8 @@ const validateJWT = (req: TypedRequest<{}, {}>, res: Response, next: NextFunctio
     try {
         const payload = <PayloadJWT>jwt.verify(token, process.env.SECRET_JWT_SEED!);
 
-        //una vez el token es válido se asigna uid y name al req
-        req.uid = payload.uid;
+        //una vez el token es válido se asigna _id y name al req
+        req._id = payload._id;
         req.name = payload.name;
 
     } catch (error) {

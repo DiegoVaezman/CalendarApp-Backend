@@ -24,6 +24,9 @@ const eventSchema = new Schema<EventType>({
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'User'
+    },
+    bgColor: {
+        type: String,
     }
 });
 

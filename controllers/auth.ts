@@ -12,7 +12,7 @@ import { LoginUserBody, UserType } from '../interfaces';
         if (user) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El usuario ya existe con ese correo'
+                msg: 'El usuario ya existe'
             });
         };
 
@@ -30,7 +30,7 @@ import { LoginUserBody, UserType } from '../interfaces';
 
         res.status(201).json({
             ok: true, 
-            uid: user._id,
+            _id: user._id,
             name: user.name,
             token
         });
@@ -72,7 +72,7 @@ const loginUser =  async (req: TypedRequest<LoginUserBody>, res: Response) => {
 
         res.json({
             ok: true,
-            uid: user._id,
+            _id: user._id,
             name: user.name,
             token
         });
@@ -87,11 +87,11 @@ const loginUser =  async (req: TypedRequest<LoginUserBody>, res: Response) => {
 }
 
 const revalidateToken = async (req: TypedRequest, res: Response) => {
-    const {uid, name} = req;
+    const {_id, name} = req;
     //generar token
-    const token = await generateJWT(uid!, name!);
+    const token = await generateJWT(_id!, name!);
 
-    res.json({ok: true, token});
+    res.json({ok: true, _id, name, token});
 }
 
 
