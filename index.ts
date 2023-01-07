@@ -29,9 +29,13 @@ app.use(express.json());
 app.use('/api/auth',  authRouter);
 app.use('/api/events',  eventsRouter);
 
-app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html')
-})
+
+//si la aplicación front se aloja en el mismo servidor que el back, osea que el build se mete en la carpeta public del backend y es alojado todo en el mismo servidor se debería utilizar
+// esta función para evitar el error en las rutas internas de react ya que el navegador supondrá que son rutas del servidor y no existen, por eso esta función hace que todas las rutas distintas
+// a las configuradas devuelven la aplicación alojada en public:
+// app.get('*', (req, res) => {
+//     res.sendFile(__dirname + '/public/index.html')
+// })
 
 
 
