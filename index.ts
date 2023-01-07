@@ -30,7 +30,7 @@ app.use('/api/auth',  authRouter);
 app.use('/api/events',  eventsRouter);
 
 app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/dist/index.html')
+    res.sendFile(__dirname + '/public/index.html')
 })
 
 
